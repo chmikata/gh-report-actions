@@ -38,7 +38,7 @@ Global Flags:
 | `token` | `t`            | `String` | `true`   |         | PAT or GitHub Token               |
 | `title` | `T`            | `String` | `true`   |         | Issue title                       |
 | `input` | `i`            | `String` | `true`   |         | Issue text                        |
-| `label` | `l`            | `String` | `false`  |         | Label to be assigned to the issue |
+| `label` | `l`            | `String` | `true`   |         | Label to be assigned to the issue |
 
 ## Command Output
 
@@ -46,6 +46,5 @@ Global Flags:
 
 ```bash
 $ gh-report-cli report --org org --repo repo --token ********** --input input.json --label label
-{"id":1234567,"name":"test/package1"}
-{"id":2345678,"name":"test/package2"}
+{"id":1,"number":5,"title":"title string","body":"body string"}
 ```

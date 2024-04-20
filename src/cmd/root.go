@@ -37,4 +37,5 @@ func init() {
 	rootCmd.MarkPersistentFlagRequired("token")
 	rootCmd.MarkPersistentFlagRequired("title")
 	rootCmd.MarkPersistentFlagRequired("input")
+	rootCmd.MarkPersistentFlagRequired("label")
 }

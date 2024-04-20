@@ -4,9 +4,11 @@ Copyright © 2024 chmikata <chmikata@gmail.com>
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 
+	"github.com/chmikata/gh-report-cli/internal/application"
 	"github.com/spf13/cobra"
 )
 
@@ -23,7 +25,22 @@ var reportCmd = &cobra.Command{
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		fmt.Println("report called")
+		org, _ := rootCmd.PersistentFlags().GetString("org")
+		repo, _ := rootCmd.PersistentFlags().GetString("repo")
+		token, _ := rootCmd.PersistentFlags().GetString("token")
+		title, _ := rootCmd.PersistentFlags().GetString("title")
+		input, _ := rootCmd.PersistentFlags().GetString("input")
+		label, _ := rootCmd.PersistentFlags().GetString("label")
+		reporter := application.NewReporter(org, repo, token)
+		issue, err := reporter.Report(title, input, label)
+		if err != nil {
+			return err
+		}
+		v, err := json.Marshal(issue)
+		if err != nil {
+			return err
+		}
+		fmt.Println(string(v))
 		return nil
 	},
 }
