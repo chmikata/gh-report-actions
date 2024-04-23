@@ -1,0 +1,37 @@
+name: "GitHub Issue Operation"
+description: "Reporting GitHub Issue with gh-report-cli"
+author: "mekka<chmikata@gmail.com>"
+inputs:
+  org:
+    description: "Organization name"
+    required: true
+  repo:
+    description: "Repository name"
+    required: true
+  token:
+    description: "GITHUB_TOKEN or Personal Access Token"
+    required: true
+  title:
+    description: "Issue title"
+    required: true
+  input:
+    description: "File path Issue body"
+    required: true
+  label:
+    description: "Issue label"
+    required: false
+    default: "security-scan"
+outputs:
+  result:
+    description: "Output result"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - "-c report"
+    - "-o ${{ inputs.org }}"
+    - "-r ${{ inputs.repo }}"
+    - "-t ${{ inputs.token }}"
+    - "-T ${{ inputs.title }}"
+    - "-i ${{ inputs.input }}"
+    - "-l ${{ inputs.label }}"

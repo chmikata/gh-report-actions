@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-while getopts "c:o:t:m:p:d:r:" opt; do
+while getopts "c:o:r:t:T:i:l:" opt; do
   case "${opt}" in
     c)
       cmd=${OPTARG}
@@ -10,30 +10,24 @@ while getopts "c:o:t:m:p:d:r:" opt; do
     o)
       args=$(echo "${args} -o ${OPTARG}")
     ;;
+    r)
+      args=$(echo "${args} -r ${OPTARG}")
+    ;;
     t)
       args=$(echo "${args} -t ${OPTARG}")
     ;;
-    m)
-      args=$(echo "${args} -m ${OPTARG}")
+    T)
+      args=$(echo "${args} -T ${OPTARG}")
     ;;
-    p)
-      if [ ${cmd} == "tag" ]; then
-        args=$(echo "${args} -p ${OPTARG}")
-      fi
+    i)
+      args=$(echo "${args} -i ${OPTARG}")
     ;;
-    d)
-      if [ ${cmd} == "tag" ]; then
-        args=$(echo "${args} -d ${OPTARG}")
-      fi
-    ;;
-    r)
-      if [ ${cmd} == "tag" ]; then
-        args=$(echo "${args} -r ${OPTARG}")
-      fi
+    l)
+      args=$(echo "${args} -l ${OPTARG}")
     ;;
   esac
 done
 
-output=$(/app/gh-pkg-cli ${args})
+output=$(/app/gh-report-cli ${args})
 echo "result=${output}" >> "${GITHUB_OUTPUT}"
 cat "${GITHUB_OUTPUT}"

@@ -13,20 +13,18 @@ CLI tool to manipulate the REST API of github issues.
 
 ```bash
 Usage:
-  gh-report-cli [command] [flags]
-
-Available Commands:
-  package     Display package
-  tag         Display container image tags
+  gh-report-cli report [flags]
 
 Flags:
-  -h, --help   help for package
-  ・・・
+  -h, --help   help for report
 
 Global Flags:
-  -m, --matcher string   Name of the container image to match
-  -o, --org string       Organization name
-  -t, --token string     Token for authentication
+  -i, --input string   Issue text
+  -l, --label string   Label to be assigned to the issue
+  -o, --org string     Organization name
+  -r, --repo string    Repository name
+  -T, --title string   Issue title
+  -t, --token string   Token for authentication
 ```
 
 ### Global Flags
