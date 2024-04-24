@@ -19,8 +19,7 @@ inputs:
     required: true
   label:
     description: "Issue label"
-    required: false
-    default: "security-scan"
+    required: true
 outputs:
   result:
     description: "Output result"
