@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-while getopts "c:o:r:t:T:i:l:" opt; do
+while getopts "c:o:r:t:T:i:l:s:" opt; do
   case "${opt}" in
     c)
       cmd=${OPTARG}
@@ -24,6 +24,9 @@ while getopts "c:o:r:t:T:i:l:" opt; do
     ;;
     l)
       args=$(echo "${args} -l ${OPTARG}")
+    ;;
+    s)
+      args=$(echo "${args} -s ${OPTARG}")
     ;;
   esac
 done

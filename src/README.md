@@ -23,26 +23,28 @@ Global Flags:
   -l, --label string   Label to be assigned to the issue
   -o, --org string     Organization name
   -r, --repo string    Repository name
-  -T, --title string   Issue title
-  -t, --token string   Token for authentication
+  -s, --search string   Label to search for issues
+  -T, --title string    Issue title
+  -t, --token string    Token for authentication
 ```
 
 ### Global Flags
 
-| Name    | Shortened Name | Type     | Required | Default | Description                       |
-| ------- | -------------- | -------- | -------- | ------- | --------------------------------- |
-| `org`   | `o`            | `String` | `true`   |         | Organization name                 |
-| `repo`  | `r`            | `String` | `true`   |         | Repository name                   |
-| `token` | `t`            | `String` | `true`   |         | PAT or GitHub Token               |
-| `title` | `T`            | `String` | `true`   |         | Issue title                       |
-| `input` | `i`            | `String` | `true`   |         | Issue text                        |
-| `label` | `l`            | `String` | `true`   |         | Label to be assigned to the issue |
+| Name     | Shortened Name | Type     | Required | Default | Description                       |
+| -------- | -------------- | -------- | -------- | ------- | --------------------------------- |
+| `org`    | `o`            | `String` | `true`   |         | Organization name                 |
+| `repo`   | `r`            | `String` | `true`   |         | Repository name                   |
+| `token`  | `t`            | `String` | `true`   |         | PAT or GitHub Token               |
+| `title`  | `T`            | `String` | `true`   |         | Issue title                       |
+| `input`  | `i`            | `String` | `true`   |         | Issue text                        |
+| `label`  | `l`            | `String` | `true`   |         | Label to be assigned to the issue |
+| `search` | `s`            | `String` | `true`   |         | Label to search for issues        |
 
 ## Command Output
 
 ### Command [report]
 
 ```bash
-$ gh-report-cli report --org org --repo repo --token ********** --input input.json --label label
+$ gh-report-cli report --org org --repo repo --token ********** --input input.json --label label --search search-label
 {"id":1,"number":5,"title":"title string","body":"body string"}
 ```

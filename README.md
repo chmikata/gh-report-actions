@@ -12,14 +12,15 @@ It allows you to register an Issue and update the Issue with the same title.
 
 ### inputs
 
-| Name    | Type     | Required | Default | Description                                              |
-| ------- | -------- | -------- | ------- | -------------------------------------------------------- |
-| `org`   | `String` | `true`   |         | Name of the organization to which the repository belongs |
-| `repo`  | `String` | `true`   |         | Repository name                                          |
-| `token` | `String` | `true`   |         | PAT or GitHub Token                                      |
-| `title` | `String` | `true`   |         | Issue title                                              |
-| `input` | `String` | `true`   |         | File path of the content to be registered in the Issue   |
-| `label` | `String` | `true`   |         | Label to be assigned to the issue                        |
+| Name     | Type     | Required | Default | Description                                              |
+| -------- | -------- | -------- | ------- | -------------------------------------------------------- |
+| `org`    | `String` | `true`   |         | Name of the organization to which the repository belongs |
+| `repo`   | `String` | `true`   |         | Repository name                                          |
+| `token`  | `String` | `true`   |         | PAT or GitHub Token                                      |
+| `title`  | `String` | `true`   |         | Issue title                                              |
+| `input`  | `String` | `true`   |         | File path of the content to be registered in the Issue   |
+| `label`  | `String` | `true`   |         | Label to be assigned to the issue                        |
+| `search` | `String` | `true`   |         | Label to search for issues                               |
 
 ### outputs
 
@@ -51,6 +52,7 @@ jobs:
           title: title
           input: report/body.out
           label: label
+          search: search
       - name: Output Result
         run: |
           echo ${{ steps.report.outputs.result }}
