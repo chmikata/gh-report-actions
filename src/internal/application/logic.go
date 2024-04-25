@@ -78,19 +78,19 @@ func NewReporter(org, repo, token string, options ...Option) *Reporter {
 	return reporter
 }
 
-func (r *Reporter) Report(title, input, label string) (*Issue, error) {
-	exist, number, err := r.isExistIssue(title, label)
+func (r *Reporter) Report(title, input, search string, labels []string) (*Issue, error) {
+	exist, number, err := r.isExistIssue(title, search)
 	if err != nil {
 		return nil, err
 	}
 	if exist {
-		return r.updateIssue(title, input, label, number)
+		return r.updateIssue(title, input, labels, number)
 	} else {
-		return r.createIssue(title, input, label)
+		return r.createIssue(title, input, labels)
 	}
 }
 
-func (r *Reporter) createIssue(title, input, label string) (*Issue, error) {
+func (r *Reporter) createIssue(title, input string, labels []string) (*Issue, error) {
 	body, err := r.readBodyText(input)
 	if err != nil {
 		return nil, err
@@ -102,7 +102,7 @@ func (r *Reporter) createIssue(title, input, label string) (*Issue, error) {
 	}{
 		Title:  title,
 		Body:   body,
-		Labels: []string{label},
+		Labels: labels,
 	}
 	jsonData, err := json.Marshal(data)
 	if err != nil {
@@ -124,7 +124,7 @@ func (r *Reporter) createIssue(title, input, label string) (*Issue, error) {
 	return issue, nil
 }
 
-func (r *Reporter) updateIssue(title, input, label string, number int) (*Issue, error) {
+func (r *Reporter) updateIssue(title, input string, labels []string, number int) (*Issue, error) {
 	body, err := r.readBodyText(input)
 	if err != nil {
 		return nil, err
@@ -136,7 +136,7 @@ func (r *Reporter) updateIssue(title, input, label string, number int) (*Issue, 
 	}{
 		Title:  title,
 		Body:   body,
-		Labels: []string{label},
+		Labels: labels,
 	}
 	jsonData, err := json.Marshal(data)
 	if err != nil {
@@ -166,7 +166,7 @@ func (r *Reporter) readBodyText(input string) (string, error) {
 	return string(b), nil
 }
 
-func (r *Reporter) isExistIssue(title, label string) (bool, int, error) {
+func (r *Reporter) isExistIssue(title, search string) (bool, int, error) {
 	for i := 1; ; i++ {
 		req, err := http.NewRequest(
 			"GET",
@@ -176,7 +176,7 @@ func (r *Reporter) isExistIssue(title, label string) (bool, int, error) {
 			return false, 0, err
 		}
 		q := req.URL.Query()
-		q.Add("labels", label)
+		q.Add("labels", search)
 		q.Add("per_page", "100")
 		q.Add("page", fmt.Sprintf("%d", i))
 		req.URL.RawQuery = q.Encode()

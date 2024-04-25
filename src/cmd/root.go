@@ -31,6 +31,7 @@ func init() {
 	rootCmd.PersistentFlags().StringP("title", "T", "", "Issue title")
 	rootCmd.PersistentFlags().StringP("input", "i", "", "Issue text")
 	rootCmd.PersistentFlags().StringP("label", "l", "", "Label to be assigned to the issue")
+	rootCmd.PersistentFlags().StringP("search", "s", "", "Label to search for issues")
 
 	rootCmd.MarkPersistentFlagRequired("org")
 	rootCmd.MarkPersistentFlagRequired("repo")
@@ -38,4 +39,5 @@ func init() {
 	rootCmd.MarkPersistentFlagRequired("title")
 	rootCmd.MarkPersistentFlagRequired("input")
 	rootCmd.MarkPersistentFlagRequired("label")
+	rootCmd.MarkPersistentFlagRequired("search")
 }

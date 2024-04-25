@@ -18,7 +18,10 @@ inputs:
     description: "File path Issue body"
     required: true
   label:
-    description: "Issue label"
+    description: "Register Issue label"
+    required: true
+  search:
+    description: "Search issue label"
     required: true
 outputs:
   result:
@@ -34,3 +37,4 @@ runs:
     - "-T ${{ inputs.title }}"
     - "-i ${{ inputs.input }}"
     - "-l ${{ inputs.label }}"
+    - "-s ${{ inputs.search }}"

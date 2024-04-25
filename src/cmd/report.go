@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/chmikata/gh-report-cli/internal/application"
 	"github.com/spf13/cobra"
@@ -31,8 +32,10 @@ var reportCmd = &cobra.Command{
 		title, _ := rootCmd.PersistentFlags().GetString("title")
 		input, _ := rootCmd.PersistentFlags().GetString("input")
 		label, _ := rootCmd.PersistentFlags().GetString("label")
+		labels := strings.Split(label, ",")
+		search, _ := rootCmd.PersistentFlags().GetString("search")
 		reporter := application.NewReporter(org, repo, token)
-		issue, err := reporter.Report(title, input, label)
+		issue, err := reporter.Report(title, input, search, labels)
 		if err != nil {
 			return err
 		}
